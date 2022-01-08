@@ -1,0 +1,37 @@
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex_start {
+  display: flex;
+}
+
+.btn_default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 1.25rem 3rem;
+  color: var(--white);
+  background-color: var(--primary);
+
+  border: 0;
+  border-radius: 2rem;
+}
+
+.btn_secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 1.25rem 3rem;
+  color: var(--primary);
+  background-color: var(--white);
+
+  border: 1px solid var(--primary);
+  border-radius: 2rem;
+}
