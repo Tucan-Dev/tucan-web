@@ -53,3 +53,9 @@
     filter: brightness(0.9);
   }
 }
+
+@media (max-width: 468px) {
+  .model {
+    transform: translateY(2.5rem);
+  }
+}
