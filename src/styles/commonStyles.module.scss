@@ -2,10 +2,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
 
-.flex_start {
-  display: flex;
+  margin-top: 1rem;
 }
 
 .btn_default {
@@ -14,12 +12,18 @@
   justify-content: center;
   gap: 0.5rem;
 
-  padding: 1.25rem 3rem;
+  padding: 0.8rem 1.5rem;
   color: var(--white);
   background-color: var(--primary);
 
   border: 0;
   border-radius: 2rem;
+
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 }
 
 .btn_secondary {
@@ -28,10 +32,16 @@
   justify-content: center;
   gap: 0.5rem;
 
-  padding: 1.25rem 3rem;
+  padding: 0.8rem 2rem;
   color: var(--primary);
   background-color: var(--white);
 
   border: 1px solid var(--primary);
   border-radius: 2rem;
+
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 }

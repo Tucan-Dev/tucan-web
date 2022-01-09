@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useForm, SubmitHandler } from "react-hook-form";
+
 import { Landpage } from "../components/Layout/landpage";
 
 import styles from "../styles/pages/home.module.scss";
@@ -11,7 +13,22 @@ import modelo02 from "../assets/images/image03.png";
 import Link from "next/link";
 import { Title } from "components/title";
 
+interface IFormInputs {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
+
 export default function Home() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IFormInputs>();
+
   return (
     <Landpage title="Agência Tucan">
       <header className={styles.header}>
@@ -35,7 +52,7 @@ export default function Home() {
       </header>
 
       <div id="main" className={styles.about}>
-        <div className={styles.dev}>
+        <div className={styles.content_about}>
           <div>
             <Title
               icon="ri-computer-line ri-2x"
@@ -68,50 +85,130 @@ export default function Home() {
       </div>
 
       <div className={styles.service}>
-        <Title
-          icon="ri-service-line ri-2x"
-          title="Conheça os serviços que a Tucan  tem a oferecer"
-        />
-        <div className={commonStyles.flex_start}>
-          <div className={styles.model}>
-            <Image src={modelo02} alt="Computador" height={483} width={520} />
+        <div className={styles.model}>
+          <Title
+            icon="ri-service-line ri-2x"
+            title="Conheça os serviços que a Tucan  tem a oferecer"
+          />
+          <Image src={modelo02} alt="Computador" height={483} width={520} />
+        </div>
+
+        <div className={styles.cards}>
+          <div className={styles.card}>
+            <i className="ri-code-s-slash-line ri-2x" />
+            <h2>Desenvolvimentos de sites</h2>
+            <p>
+              Desenvolvimento de site exclusivo, focado em UX/UI, responsivo,
+              otimizado (SEO) e gerenciável.
+            </p>
           </div>
 
-          <div className={styles.cards}>
-            <div className={styles.card}>
-              <i className="ri-code-s-slash-line ri-2x" />
-              <h2>Desenvolvimentos de sites</h2>
-              <p>
-                Desenvolvimento de site exclusivo, focado em UX/UI, responsivo,
-                otimizado (SEO) e gerenciável.
-              </p>
+          <div className={styles.card}>
+            <i className="ri-palette-line ri-2x" />
+            <h2>Identidade Visual</h2>
+            <p>
+              Criação de identidade visual, manual, conceito da marca, logo e
+              demais materias auxiliares de branding.
+            </p>
+          </div>
+          <div className={styles.card}>
+            <i className="ri-chat-smile-2-line ri-2x" />
+            <h2>Gestão de redes sociais</h2>
+            <p>
+              Através de um planejamento estratégico, criamos presença digital
+              para o seu negócio e o aproximamos de possíveis clientes.
+            </p>
+          </div>
+          <div className={styles.card}>
+            <i className="ri-store-line ri-2x" />
+            <h2>E-Commerce</h2>
+            <p>
+              Plataforma completa para e-commerce, sistema de venda online e
+              customização para sua empresa vender mais.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.contact}>
+        <div className={styles.content_contact}>
+          <div>
+            <Title
+              icon="ri-customer-service-2-line ri-2x"
+              title="Conte sua ideia"
+              subtitle="Envie um e-mail, ou ligue e nos conte sobre o que você quer desenvolver."
+            />
+
+            <div>
+              <p>(92) 99243-0969</p>
+              <p>(92) 99243-0969</p>
             </div>
 
-            <div className={styles.card}>
-              <i className="ri-palette-line ri-2x" />
-              <h2>Identidade Visual</h2>
-              <p>
-                Criação de identidade visual, manual, conceito da marca, logo e
-                demais materias auxiliares de branding.
-              </p>
+            <div>
+              <p>tucan.developers@gmail.com</p>
             </div>
-            <div className={styles.card}>
-              <i className="ri-chat-smile-2-line ri-2x" />
-              <h2>Gestão de redes sociais</h2>
+
+            <div>
               <p>
-                Através de um planejamento estratégico, criamos presença digital
-                para o seu negócio e o aproximamos de possíveis clientes.
-              </p>
-            </div>
-            <div className={styles.card}>
-              <i className="ri-store-line ri-2x" />
-              <h2>E-Commerce</h2>
-              <p>
-                Plataforma completa para e-commerce, sistema de venda online e
-                customização para sua empresa vender mais.
+                R. Francisco Fiuza de Lima, 3848, Jauary II, Itacoatiara -
+                Amazonas, 69104376
               </p>
             </div>
           </div>
+
+          <form
+            className={styles.form_contact}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className={styles.input_block}>
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                placeholder="Nome completo"
+                {...register("name", { required: true })}
+              />
+              <p>{errors.name && "Por favor digite seu nome!"}</p>
+            </div>
+
+            <div className={styles.input_block}>
+              <label htmlFor="email">E-mail</label>
+              <input
+                type="text"
+                placeholder="E-mail"
+                {...register("email", { required: true })}
+              />
+              <p>{errors.email && "Por favor digite seu e-mail!"}</p>
+            </div>
+
+            <div className={styles.input_block}>
+              <label htmlFor="phone">Telefone</label>
+              <input
+                type="tel"
+                placeholder="Telefone"
+                {...register("phone", { required: true })}
+              />
+              <p>{errors.phone && "Por favor digite seu telefone!"}</p>
+            </div>
+
+            <div className={styles.input_block}>
+              <label htmlFor="message">Mensagem</label>
+              <input
+                type="text"
+                placeholder="Fale um pouco sobre seu projeto"
+                {...register("message", { required: true })}
+              />
+              <p>{errors.message && "Por favor digite sua mensagem!"}</p>
+            </div>
+
+            <div className={commonStyles.flex}>
+              <button className={commonStyles.btn_default} type="submit">
+                Enviar
+              </button>
+              <button className={commonStyles.btn_secondary} type="reset">
+                Cancelar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </Landpage>
