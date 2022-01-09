@@ -10,6 +10,10 @@ import modelo01 from "../assets/images/image01.png";
 import computer from "../assets/images/image02.png";
 import modelo02 from "../assets/images/image03.png";
 
+import job01 from "../assets/images/job1.jpg";
+import job02 from "../assets/images/job2.jpg";
+import job03 from "../assets/images/job3.jpg";
+
 import Link from "next/link";
 import { Title } from "components/title";
 
@@ -85,12 +89,18 @@ export default function Home() {
       </div>
 
       <div className={styles.service}>
-        <div className={styles.model}>
+        <div className={styles.content_service}>
           <Title
             icon="ri-service-line ri-2x"
             title="Conheça os serviços que a Tucan  tem a oferecer"
           />
-          <Image src={modelo02} alt="Computador" height={483} width={520} />
+          <Image
+            className={commonStyles.model}
+            src={modelo02}
+            alt="Computador"
+            height={483}
+            width={520}
+          />
         </div>
 
         <div className={styles.cards}>
@@ -140,16 +150,23 @@ export default function Home() {
             />
 
             <div>
-              <p>(92) 99243-0969</p>
-              <p>(92) 99243-0969</p>
-            </div>
-
-            <div>
-              <p>tucan.developers@gmail.com</p>
+              <p>
+                <i className="ri-phone-line" /> (92) 98544-5392
+              </p>
+              <p>
+                <i className="ri-phone-line" /> (92) 99243-0969
+              </p>
             </div>
 
             <div>
               <p>
+                <i className="ri-mail-line" /> tucan.developers@gmail.com
+              </p>
+            </div>
+
+            <div>
+              <p>
+                <i className="ri-map-pin-5-line" />
                 R. Francisco Fiuza de Lima, 3848, Jauary II, Itacoatiara -
                 Amazonas, 69104376
               </p>
@@ -209,6 +226,45 @@ export default function Home() {
               </button>
             </div>
           </form>
+        </div>
+      </div>
+
+      <div className={styles.gallery}>
+        <div className={styles.content_gallery}>
+          <Title
+            icon="ri-gallery-line ri-2x"
+            title="Galeria de Jobs"
+            subtitle="Tivemos a honra de criar, gerenciar, estruturar e participar de cada uma dessas marcas. Confira o portfólio completo."
+          />
+        </div>
+        <div className={styles.content_jobs}>
+          <div className={commonStyles.image_block}>
+            <Image
+              src={job01}
+              alt="imag"
+              layout="responsive"
+              width={480}
+              height={480}
+            />
+          </div>
+          <div className={commonStyles.image_block}>
+            <Image
+              src={job02}
+              alt="imag"
+              layout="responsive"
+              width={480}
+              height={480}
+            />
+          </div>
+          <div className={commonStyles.image_block}>
+            <Image
+              src={job03}
+              alt="imag"
+              layout="responsive"
+              width={480}
+              height={480}
+            />
+          </div>
         </div>
       </div>
     </Landpage>
