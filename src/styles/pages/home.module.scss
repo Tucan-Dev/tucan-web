@@ -228,16 +228,6 @@ div.gallery {
       &:hover {
         z-index: 1;
         transform: scale(1.1);
-
-        &:before {
-          content: "";
-          background: rgba(0, 0, 0, 0.5);
-          top: 0;
-          left: 0;
-          right: 0;
-          left: 0;
-          z-index: -1;
-        }
       }
     }
   }
