@@ -15,7 +15,7 @@ import job02 from "../assets/images/job2.jpg";
 import job03 from "../assets/images/job3.jpg";
 
 import Link from "next/link";
-import { Title } from "components/title";
+import { Title } from "components/Title";
 
 interface IFormInputs {
   name: string;

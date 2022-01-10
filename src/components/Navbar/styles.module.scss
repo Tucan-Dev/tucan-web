@@ -1,0 +1,141 @@
+header.container {
+  border-bottom: 1px solid var(--gray-100);
+  max-width: 1240px;
+
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 auto;
+    padding: 1rem 0;
+    width: 100%;
+
+    ul.navmenu {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      list-style: none;
+
+      li.navitem {
+        margin-left: 5rem;
+
+        .navlink {
+          font-size: 1.2rem;
+          font-weight: 400;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            color: var(--primary);
+          }
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+  }
+}
+
+// device: mobile
+@media (max-width: 1024px) {
+  header.container {
+    max-width: 1240px;
+
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      ul.navmenu {
+        display: flex;
+        flex-direction: column;
+
+        padding: 0 2rem;
+
+        li.navitem {
+          margin-left: auto;
+
+          .navlink {
+            font-size: 1.2rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      display: none;
+      background-color: transparent;
+      border: none;
+      border-radius: 5px;
+
+      .bar {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin: 5px auto;
+
+        transition: all 0.3s ease-in-out;
+
+        background-color: var(--primary);
+        border-radius: 2px;
+      }
+    }
+
+    @media only screen and (max-width: 1024px) {
+      .navmenu {
+        position: absolute;
+        top: -100%;
+        right: 0;
+        opacity: 0;
+
+        width: 100%;
+
+        background-color: var(--background-light);
+
+        text-align: center;
+        transition: 0.2s;
+
+        z-index: 1;
+      }
+
+      ul.navmenu.active {
+        top: 6rem;
+        right: 0;
+        opacity: 1;
+      }
+
+      li.navitem {
+        margin: 1rem 0;
+      }
+
+      .hamburger {
+        display: block;
+        cursor: pointer;
+      }
+
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .bar:nth-child(1) {
+        background: var(--red);
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger.active .bar:nth-child(3) {
+        background: var(--red);
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+}
