@@ -33,7 +33,7 @@ export default function About() {
             das empresas e pessoas, gerando valor para todo nosso ecossistema.
           </p>
 
-          <div className={commonStyles.flex}>
+          <div className={styles.flex_about}>
             <div className={styles.mission}>
               <span>01</span>
               <h2>Missão</h2>
