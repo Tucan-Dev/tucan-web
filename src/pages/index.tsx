@@ -1,10 +1,14 @@
+import Link from "next/link";
 import Image from "next/image";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Landpage } from "../components/Layout/landpage";
 
 import styles from "../styles/pages/home.module.scss";
 import commonStyles from "../styles/commonStyles.module.scss";
+
+import { Title } from "components/Title";
 
 import modelo01 from "../assets/images/image01.png";
 import computer from "../assets/images/image02.png";
@@ -13,9 +17,6 @@ import modelo02 from "../assets/images/image03.png";
 import job01 from "../assets/images/job1.jpg";
 import job02 from "../assets/images/job2.jpg";
 import job03 from "../assets/images/job3.jpg";
-
-import Link from "next/link";
-import { Title } from "components/Title";
 
 interface IFormInputs {
   name: string;
