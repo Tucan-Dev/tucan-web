@@ -2,7 +2,6 @@ import { Landpage } from "components/Layout/landpage";
 import { Title } from "components/Title";
 
 import styles from "../styles/pages/about.module.scss";
-import commonStyles from "../styles/commonStyles.module.scss";
 
 export default function About() {
   return (
