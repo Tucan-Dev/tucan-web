@@ -1,17 +1,92 @@
 .container_budget {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 
   max-width: 1240px;
-  margin: 2rem auto 4rem;
+  margin: 2rem auto 0;
   padding: 0 1rem;
+}
+.aside {
+  flex: 1;
 
-  aside {
-    flex: 1;
+  h1 {
+    font-weight: 700;
+    font-size: 4rem;
 
+    color: var(--title);
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 1.5rem;
+
+    color: var(--subtitle);
+  }
+}
+
+.form_budget {
+  flex: 2;
+
+  div,
+  input,
+  textarea {
+    border-radius: 1.5rem;
+
+    width: 100%;
+    min-width: 100%;
+  }
+
+  P {
+    font-size: 0.8rem;
+    color: var(--red);
+  }
+
+  .form_group_checkbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    margin-bottom: 2rem;
+
+    .form_control_label {
+      border: 1px solid;
+      width: 100%;
+    }
+  }
+
+  .form_control_radio {
+    margin-bottom: 2rem;
+  }
+
+  .info_project {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .info_project_item {
+      border: 1px solid;
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 468px) {
+  .container_budget {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto 2rem;
+  }
+
+  .aside {
     h1 {
       font-weight: 700;
-      font-size: 4rem;
+      font-size: 3rem;
 
       color: var(--title);
     }
@@ -24,9 +99,7 @@
     }
   }
 
-  form {
-    flex: 2;
-
+  .form_budget {
     div,
     input,
     textarea {
@@ -43,7 +116,7 @@
 
     .form_group_checkbox {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
 
       margin-bottom: 2rem;
 
@@ -71,86 +144,6 @@
         display: flex;
         flex-direction: row;
         gap: 1rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 468px) {
-  .container_budget {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    max-width: 1240px;
-    margin: 2rem auto 4rem;
-    padding: 0 1rem;
-
-    aside {
-      flex: 1;
-
-      h1 {
-        font-weight: 700;
-        font-size: 4rem;
-
-        color: var(--title);
-      }
-
-      p {
-        font-weight: 300;
-        font-size: 1.5rem;
-
-        color: var(--subtitle);
-      }
-    }
-
-    form {
-      flex: 2;
-
-      div,
-      input,
-      textarea {
-        border-radius: 2rem;
-      }
-
-      P {
-        font-size: 0.8rem;
-        color: var(--red);
-      }
-
-      .form_group_checkbox {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-
-        margin-bottom: 2rem;
-
-        .form_control_label {
-          border: 1px solid;
-          width: 100%;
-        }
-      }
-
-      .form_control_radio {
-        margin-bottom: 2rem;
-      }
-
-      .info_project {
-        width: 100%;
-
-        margin-top: 2rem;
-
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        .info_project_item {
-          border: 1px solid;
-          width: 100%;
-
-          display: flex;
-          flex-direction: row;
-          gap: 1rem;
-        }
       }
     }
   }

@@ -5,7 +5,6 @@ import {
   FormControlLabel,
   Checkbox,
   FormControl,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
@@ -73,17 +72,17 @@ export default function Budget() {
   };
 
   return (
-    <Landpage>
+    <Landpage title="Orçamento">
       <div className={styles.container_budget}>
-        <aside>
+        <div className={styles.aside}>
           <h1>Deixe seu projeto em boas mãos!</h1>
           <p>
             Preencha corretamente as informações do formulário para que um de
             nossos especialistas entre em contato
           </p>
-        </aside>
+        </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form_budget} onSubmit={handleSubmit(onSubmit)}>
           <Title title="Como podemos ajudá-lo?" icon="ri-question-line ri-2x" />
           <FormGroup className={styles.form_group_checkbox}>
             <FormControlLabel
@@ -202,6 +201,9 @@ export default function Budget() {
               id="outlined-required"
               label="Nome completo"
               variant="outlined"
+              style={{
+                background: "var(--white)",
+              }}
             />
             <p>{errors.name && "Por favor, informe seu NOME!"}</p>
 
@@ -213,6 +215,9 @@ export default function Budget() {
               id="outlined-required"
               label="E-mail"
               variant="outlined"
+              style={{
+                background: "var(--white)",
+              }}
             />
             <p>{errors["e-mail"] && "Por favor, informe seu E-MAIL!"}</p>
             <p>
@@ -229,6 +234,9 @@ export default function Budget() {
               variant="outlined"
               value={phone1}
               onChange={(e) => setPhone1(maskPhone(e.target.value))}
+              style={{
+                background: "var(--white)",
+              }}
             />
             <p>
               {errors.phone && "Por favor, informe seu número de TELEFONE!"}
@@ -239,6 +247,9 @@ export default function Budget() {
               id="outlined-required"
               label="Empresa"
               variant="outlined"
+              style={{
+                background: "var(--white)",
+              }}
             />
             <p>
               {errors.company && "Por favor, informe o número de sua EMPRESA!"}
@@ -254,6 +265,9 @@ export default function Budget() {
                 value={didMeet}
                 label="Como nos conheceu?"
                 onChange={handleChange}
+                style={{
+                  background: "var(--white)",
+                }}
               >
                 <MenuItem value="facebook">Facebook</MenuItem>
                 <MenuItem value="instagram">Instagram</MenuItem>
@@ -272,6 +286,7 @@ export default function Budget() {
                 width: "100%",
                 padding: ".8rem",
                 border: "1px solid var(--gray)",
+                background: "var(--white)",
               }}
             />
             <p>{errors.message && "Por favor, digite sua MENSAGEM!"}</p>
