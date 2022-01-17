@@ -17,10 +17,23 @@ import modelo02 from "../assets/images/image03.png";
 import job01 from "../assets/images/job1.jpg";
 import job02 from "../assets/images/job2.jpg";
 import job03 from "../assets/images/job3.jpg";
+import {
+  Box,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextareaAutosize,
+} from "@mui/material";
+
+import { maskPhone } from "utils/masked";
+import { ValidatedEmail } from "utils/validation";
+import { useState } from "react";
 
 interface IFormInputs {
   name: string;
-  email: string;
+  "e-mail": string;
   phone: string;
   message: string;
 }
@@ -28,6 +41,8 @@ interface IFormInputs {
 const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
 
 export default function Home() {
+  const [phone1, setPhone1] = useState("");
+
   const {
     register,
     formState: { errors },
@@ -178,51 +193,78 @@ export default function Home() {
             className={styles.form_contact}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className={styles.input_block}>
-              <label htmlFor="name">Nome</label>
-              <input
-                type="text"
-                placeholder="Nome completo"
+            <Box className={styles.info_contact}>
+              <TextField
                 {...register("name", { required: true })}
+                id="outlined-required"
+                label="Nome completo"
+                variant="outlined"
+                style={{
+                  background: "var(--white)",
+                }}
               />
-              <p>{errors.name && "Por favor digite seu nome!"}</p>
-            </div>
+              <p>{errors.name && "Por favor, informe seu NOME!"}</p>
 
-            <div className={styles.input_block}>
-              <label htmlFor="email">E-mail</label>
-              <input
-                type="text"
-                placeholder="E-mail"
-                {...register("email", { required: true })}
+              <TextField
+                {...register("e-mail", {
+                  required: true,
+                  pattern: ValidatedEmail,
+                })}
+                id="outlined-required"
+                label="E-mail"
+                variant="outlined"
+                style={{
+                  background: "var(--white)",
+                }}
               />
-              <p>{errors.email && "Por favor digite seu e-mail!"}</p>
-            </div>
+              <p>{errors["e-mail"] && "Por favor, informe seu E-MAIL!"}</p>
+              <p>
+                {errors["e-mail"] && errors["e-mail"].type === "pattern"
+                  ? "Por favor digite seu E-MAIL corretamente!"
+                  : ""}
+              </p>
 
-            <div className={styles.input_block}>
-              <label htmlFor="phone">Telefone</label>
-              <input
-                type="tel"
-                placeholder="Telefone"
+              <TextField
                 {...register("phone", { required: true })}
+                id="outlined-required"
+                type="tel"
+                label="Telefone"
+                variant="outlined"
+                value={phone1}
+                onChange={(e) => setPhone1(maskPhone(e.target.value))}
+                style={{
+                  background: "var(--white)",
+                }}
               />
-              <p>{errors.phone && "Por favor digite seu telefone!"}</p>
-            </div>
+              <p>
+                {errors.phone && "Por favor, informe seu número de TELEFONE!"}
+              </p>
 
-            <div className={styles.input_block}>
-              <label htmlFor="message">Mensagem</label>
-              <input
-                type="text"
-                placeholder="Fale um pouco sobre seu projeto"
+              <TextareaAutosize
                 {...register("message", { required: true })}
+                aria-label="minimum height"
+                minRows={10}
+                maxRows={15}
+                maxLength={900}
+                placeholder="Mensagem"
+                style={{
+                  width: "100%",
+                  padding: ".8rem",
+                  border: "1px solid var(--gray)",
+                }}
               />
-              <p>{errors.message && "Por favor digite sua mensagem!"}</p>
-            </div>
+              <p>{errors.message && "Por favor, digite sua MENSAGEM!"}</p>
+            </Box>
 
             <div className={commonStyles.flex}>
               <button className={commonStyles.btn_default} type="submit">
                 Enviar
               </button>
-              <button className={commonStyles.btn_secondary} type="reset">
+              <button
+                className={commonStyles.btn_secondary}
+                type="reset"
+                onClick={() => setPhone1("")}
+              >
                 Cancelar
               </button>
             </div>

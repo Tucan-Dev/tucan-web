@@ -240,8 +240,7 @@ export default function Budget() {
               variant="outlined"
             />
             <p>
-              {errors["e-mail"] &&
-                "Por favor, informe o número de sua EMPRESA!"}
+              {errors.company && "Por favor, informe o número de sua EMPRESA!"}
             </p>
 
             <FormControl fullWidth>
