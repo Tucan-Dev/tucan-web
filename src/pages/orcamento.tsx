@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   FormGroup,
   FormControlLabel,
@@ -21,7 +23,6 @@ import { Title } from "components/Title";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { ValidatedEmail } from "utils/validation";
-import { useState } from "react";
 import { maskPhone } from "utils/masked";
 
 import styles from "../styles/pages/budget.module.scss";

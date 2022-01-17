@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -17,19 +19,11 @@ import modelo02 from "../assets/images/image03.png";
 import job01 from "../assets/images/job1.jpg";
 import job02 from "../assets/images/job2.jpg";
 import job03 from "../assets/images/job3.jpg";
-import {
-  Box,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  TextareaAutosize,
-} from "@mui/material";
+
+import { Box, TextField, TextareaAutosize } from "@mui/material";
 
 import { maskPhone } from "utils/masked";
 import { ValidatedEmail } from "utils/validation";
-import { useState } from "react";
 
 interface IFormInputs {
   name: string;
