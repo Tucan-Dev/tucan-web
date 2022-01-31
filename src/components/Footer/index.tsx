@@ -42,8 +42,8 @@ export function Footer() {
           </p>
 
           <div className={styles.icons_block}>
-            <Link href="">
-              <a>
+            <Link href="https://www.instagram.com/tucandev/">
+              <a target="_blank">
                 <div className={commonStyles.image_block}>
                   <Image
                     src={Instagram}
@@ -55,16 +55,16 @@ export function Footer() {
               </a>
             </Link>
 
-            <Link href="">
-              <a>
+            <Link href="https://www.facebook.com/tucandev/">
+              <a target="_blank">
                 <div className={commonStyles.image_block}>
                   <Image src={Facebook} alt="facebook" width={40} height={40} />
                 </div>
               </a>
             </Link>
 
-            <Link href="">
-              <a>
+            <Link href="https://www.linkedin.com/company/tucandev/">
+              <a target="_blank">
                 <div className={commonStyles.image_block}>
                   <Image src={LinkedIn} alt="linkedIn" width={40} height={40} />
                 </div>
