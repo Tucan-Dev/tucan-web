@@ -202,6 +202,7 @@ export default function Budget() {
               label="Nome completo"
               variant="outlined"
               style={{
+                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
@@ -216,6 +217,7 @@ export default function Budget() {
               label="E-mail"
               variant="outlined"
               style={{
+                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
@@ -235,6 +237,7 @@ export default function Budget() {
               value={phone1}
               onChange={(e) => setPhone1(maskPhone(e.target.value))}
               style={{
+                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
@@ -248,6 +251,7 @@ export default function Budget() {
               label="Empresa"
               variant="outlined"
               style={{
+                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
@@ -266,6 +270,8 @@ export default function Budget() {
                 label="Como nos conheceu?"
                 onChange={handleChange}
                 style={{
+                  border: "0.25px solid var(--gray)",
+
                   background: "var(--white)",
                 }}
               >

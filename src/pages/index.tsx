@@ -194,6 +194,7 @@ export default function Home() {
                 label="Nome completo"
                 variant="outlined"
                 style={{
+                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -208,6 +209,7 @@ export default function Home() {
                 label="E-mail"
                 variant="outlined"
                 style={{
+                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -227,6 +229,7 @@ export default function Home() {
                 value={phone1}
                 onChange={(e) => setPhone1(maskPhone(e.target.value))}
                 style={{
+                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -245,6 +248,7 @@ export default function Home() {
                   width: "100%",
                   padding: ".8rem",
                   border: "1px solid var(--gray)",
+                  background: "var(--white)",
                 }}
               />
               <p>{errors.message && "Por favor, digite sua MENSAGEM!"}</p>
