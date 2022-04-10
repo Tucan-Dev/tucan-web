@@ -12,6 +12,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.8",
     "@mui/styled-engine-sc": "^5.1.0",
+    "axios": "^0.26.1",
     "framer-motion": "^5",
     "next": "12.0.7",
     "nodemailer": "^6.7.2",
@@ -24,9 +25,9 @@
   },
   "devDependencies": {
     "@types/node": "17.0.8",
+    "@types/nodemailer": "^6.4.4",
     "@types/react": "17.0.38",
     "@types/sass": "^1.43.1",
-    "@types/nodemailer": "^6.4.4",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
     "typescript": "4.5.4"

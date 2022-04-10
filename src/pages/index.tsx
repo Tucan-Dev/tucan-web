@@ -20,10 +20,11 @@ import job01 from "../assets/images/job1.jpg";
 import job02 from "../assets/images/job2.jpg";
 import job03 from "../assets/images/job3.jpg";
 
-import { Box, TextField, TextareaAutosize } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 
 import { maskPhone } from "utils/masked";
 import { ValidatedEmail } from "utils/validation";
+import axios from "axios";
 
 interface IFormInputs {
   name: string;
@@ -32,16 +33,35 @@ interface IFormInputs {
   message: string;
 }
 
-const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
-
 export default function Home() {
-  const [phone1, setPhone1] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
   } = useForm<IFormInputs>();
+
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    setLoading(true);
+
+    await axios
+      .post(
+        "https://formeezy.com/api/v1/forms/62520425fe043700091f1672/submissions",
+        data
+      )
+      .then((res) => {
+        const { redirect } = res.data;
+        window.location.href = redirect;
+      })
+      .catch((err) => {
+        alert(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <Landpage title="Agência Tucan">
@@ -93,7 +113,7 @@ export default function Home() {
           </div>
 
           <div>
-            <Image src={computer} alt="Computador" height={483} width={520} />
+            <Image src={computer} alt="Computador" height={483} width={620} />
           </div>
         </div>
       </div>
@@ -189,12 +209,12 @@ export default function Home() {
           >
             <Box className={styles.info_contact}>
               <TextField
-                {...register("name", { required: true })}
+                className={styles.input}
                 id="outlined-required"
                 label="Nome completo"
+                {...register("name", { required: true })}
                 variant="outlined"
                 style={{
-                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -209,7 +229,6 @@ export default function Home() {
                 label="E-mail"
                 variant="outlined"
                 style={{
-                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -221,15 +240,15 @@ export default function Home() {
               </p>
 
               <TextField
-                {...register("phone", { required: true })}
+                {...register("phone", {
+                  required: true,
+                  onChange: (e) => setValue("phone", maskPhone(e.target.value)),
+                })}
                 id="outlined-required"
                 type="tel"
                 label="Telefone"
                 variant="outlined"
-                value={phone1}
-                onChange={(e) => setPhone1(maskPhone(e.target.value))}
                 style={{
-                  border: "0.25px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -237,17 +256,15 @@ export default function Home() {
                 {errors.phone && "Por favor, informe seu número de TELEFONE!"}
               </p>
 
-              <TextareaAutosize
+              <TextField
+                id="outlined-required"
+                label="Mensagem"
                 {...register("message", { required: true })}
-                aria-label="minimum height"
-                minRows={10}
+                variant="outlined"
+                multiline={true}
+                minRows={5}
                 maxRows={15}
-                maxLength={900}
-                placeholder="Mensagem"
                 style={{
-                  width: "100%",
-                  padding: ".8rem",
-                  border: "1px solid var(--gray)",
                   background: "var(--white)",
                 }}
               />
@@ -256,13 +273,9 @@ export default function Home() {
 
             <div className={commonStyles.flex}>
               <button className={commonStyles.btn_default} type="submit">
-                Enviar
+                {loading ? "Enviando" : "Enviar"}
               </button>
-              <button
-                className={commonStyles.btn_secondary}
-                type="reset"
-                onClick={() => setPhone1("")}
-              >
+              <button className={commonStyles.btn_secondary} type="reset">
                 Cancelar
               </button>
             </div>
