@@ -283,7 +283,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.gallery}>
+      {/* <div className={styles.gallery}>
         <div className={styles.content_gallery}>
           <Title
             icon="ri-gallery-line ri-2x"
@@ -320,7 +320,7 @@ export default function Home() {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </Landpage>
   );
 }
