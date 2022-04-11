@@ -1,20 +1,6 @@
 import { useState } from "react";
 
-import {
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  FormControl,
-  Radio,
-  RadioGroup,
-  TextField,
-  Box,
-  TextareaAutosize,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import * as material from "@mui/material";
 
 import { Landpage } from "components/Layout/landpage";
 import { Title } from "components/Title";
@@ -26,6 +12,7 @@ import { maskPhone } from "utils/masked";
 
 import styles from "../styles/pages/budget.module.scss";
 import commonStyles from "../styles/commonStyles.module.scss";
+import axios from "axios";
 
 interface IFormInput {
   website: string;
@@ -35,9 +22,7 @@ interface IFormInput {
   marketingDigital: string;
   socialMedia: string;
 
-  amount2k: string;
-  amount5k: string;
-  amount10k: string;
+  amount: string;
 
   name: string;
   "e-mail": string;
@@ -48,27 +33,59 @@ interface IFormInput {
 }
 
 export default function Budget() {
-  const [phone1, setPhone1] = useState("");
   const [didMeet, setDidMeet] = useState("");
+  const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // SELECT
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: material.SelectChangeEvent) => {
     setDidMeet(event.target.value as string);
   };
-
-  function clearInput() {
-    setPhone1("");
-    setDidMeet("");
-  }
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setValue,
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data, didMeet);
+  const onSubmitFormBudget: SubmitHandler<IFormInput> = async (data) => {
+    const payload = {
+      aplicativo: data.application ? "sim" : "não",
+      "e-commerce": data["e-commerce"] ? "sim" : "não",
+      "identidade visual": data.visualIdentify ? "sim" : "não",
+      "gestão de mídias sociais": data.socialMedia ? "sim" : "não",
+      "marketing digital": data.marketingDigital ? "sim" : "não",
+      website: data.website ? "sim" : "não",
+
+      "Orçamento inicial": amount,
+
+      nome: data.name,
+      "e-mail": data["e-mail"],
+      telefone: data.phone,
+      "nome da empresa": data.company,
+      "como nos conheceu?": didMeet,
+      "detalhes do projeto": data.message,
+    };
+
+    setLoading(true);
+
+    await axios
+      .post(
+        "https://formeezy.com/api/v1/forms/62536d366dd5720009f2a8c9/submissions",
+        payload
+      )
+      .then((res) => {
+        console.log(res);
+        const { redirect } = res.data;
+        window.location.href = redirect;
+      })
+      .catch((err) => {
+        alert(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -82,74 +99,92 @@ export default function Budget() {
           </p>
         </div>
 
-        <form className={styles.form_budget} onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className={styles.form_budget}
+          onSubmit={handleSubmit(onSubmitFormBudget)}
+        >
           <Title title="Como podemos ajudá-lo?" icon="ri-question-line ri-2x" />
-          <FormGroup className={styles.form_group_checkbox}>
-            <FormControlLabel
+          <material.FormGroup className={styles.form_group_checkbox}>
+            <material.FormControlLabel
               {...register("website")}
               control={
-                <Checkbox
+                <material.Checkbox
                   defaultChecked
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
                 />
               }
               label="Website"
             />
-            <FormControlLabel
+            <material.FormControlLabel
               {...register("application")}
               control={
-                <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }} />
+                <material.Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+                />
               }
               label="Aplicativo"
             />
 
-            <FormControlLabel
+            <material.FormControlLabel
               {...register("e-commerce")}
               control={
-                <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }} />
+                <material.Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+                />
               }
               label="E-commerce"
             />
 
-            <FormControlLabel
+            <material.FormControlLabel
               {...register("visualIdentify")}
               control={
-                <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }} />
+                <material.Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+                />
               }
               label="Identidade Visual"
             />
 
-            <FormControlLabel
+            <material.FormControlLabel
               {...register("marketingDigital")}
               control={
-                <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }} />
+                <material.Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+                />
               }
               label="Marketing Digital"
             />
 
-            <FormControlLabel
+            <material.FormControlLabel
               {...register("socialMedia")}
               control={
-                <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }} />
+                <material.Checkbox
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+                />
               }
               label="Gestão de mídias sociais"
             />
-          </FormGroup>
+          </material.FormGroup>
 
           <Title
             title="Qual seu orçamento disponível?"
             icon="ri-money-dollar-circle-line ri-2x"
           />
-          <FormControl
+
+          <material.FormControl
             className={styles.form_control_radio}
             component="fieldset"
           >
-            <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
-              <FormControlLabel
-                {...register("amount2k")}
-                value="amount_2k"
+            <material.RadioGroup
+              row
+              aria-label="gender"
+              name="row-radio-buttons-group"
+            >
+              <material.FormControlLabel
+                value="2k"
+                onClick={() => setAmount("2k")}
                 control={
-                  <Radio
+                  <material.Radio
                     sx={{
                       "& .MuiSvgIcon-root": {
                         fontSize: 32,
@@ -159,11 +194,11 @@ export default function Budget() {
                 }
                 label="Abaixo de 2k"
               />
-              <FormControlLabel
-                {...register("amount5k")}
-                value="amount_5k"
+              <material.FormControlLabel
+                value="5k"
+                onClick={() => setAmount("5k")}
                 control={
-                  <Radio
+                  <material.Radio
                     sx={{
                       "& .MuiSvgIcon-root": {
                         fontSize: 32,
@@ -173,11 +208,11 @@ export default function Budget() {
                 }
                 label="5k ~ 10k"
               />
-              <FormControlLabel
-                {...register("amount10k")}
-                value="amount_10k"
+              <material.FormControlLabel
+                value="10k"
+                onClick={() => setAmount("10k")}
                 control={
-                  <Radio
+                  <material.Radio
                     sx={{
                       "& .MuiSvgIcon-root": {
                         fontSize: 32,
@@ -187,28 +222,26 @@ export default function Budget() {
                 }
                 label="Acima de 10k"
               />
-            </RadioGroup>
-          </FormControl>
+            </material.RadioGroup>
+          </material.FormControl>
 
           <Title
             title="Informações do projeto?"
             icon="ri-information-line ri-2x"
           />
 
-          <Box className={styles.info_project}>
-            <TextField
+          <material.Box className={styles.info_project}>
+            <material.TextField
               {...register("name", { required: true })}
               id="outlined-required"
               label="Nome completo"
               variant="outlined"
               style={{
-                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
             <p>{errors.name && "Por favor, informe seu NOME!"}</p>
-
-            <TextField
+            <material.TextField
               {...register("e-mail", {
                 required: true,
                 pattern: ValidatedEmail,
@@ -217,7 +250,6 @@ export default function Budget() {
               label="E-mail"
               variant="outlined"
               style={{
-                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
@@ -227,86 +259,76 @@ export default function Budget() {
                 ? "Por favor digite seu E-MAIL corretamente!"
                 : ""}
             </p>
-
-            <TextField
-              {...register("phone", { required: true })}
+            <material.TextField
+              {...register("phone", {
+                required: true,
+                onChange: (e) => setValue("phone", maskPhone(e.target.value)),
+              })}
               id="outlined-required"
               type="tel"
               label="Telefone"
               variant="outlined"
-              value={phone1}
-              onChange={(e) => setPhone1(maskPhone(e.target.value))}
               style={{
-                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
             <p>
               {errors.phone && "Por favor, informe seu número de TELEFONE!"}
             </p>
-
-            <TextField
+            <material.TextField
               {...register("company", { required: true })}
               id="outlined-required"
               label="Empresa"
               variant="outlined"
               style={{
-                border: "0.25px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
             <p>
               {errors.company && "Por favor, informe o número de sua EMPRESA!"}
             </p>
-
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
+            <material.FormControl fullWidth>
+              <material.InputLabel id="demo-simple-select-label">
                 Como nos conheceu?
-              </InputLabel>
-              <Select
+              </material.InputLabel>
+              <material.Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={didMeet}
                 label="Como nos conheceu?"
                 onChange={handleChange}
                 style={{
-                  border: "0.25px solid var(--gray)",
-
                   background: "var(--white)",
                 }}
               >
-                <MenuItem value="facebook">Facebook</MenuItem>
-                <MenuItem value="instagram">Instagram</MenuItem>
-                <MenuItem value="linkedIn">LinkedIn</MenuItem>
-              </Select>
-            </FormControl>
+                <material.MenuItem value="facebook">Facebook</material.MenuItem>
+                <material.MenuItem value="instagram">
+                  Instagram
+                </material.MenuItem>
+                <material.MenuItem value="linkedIn">LinkedIn</material.MenuItem>
+              </material.Select>
+            </material.FormControl>
 
-            <TextareaAutosize
+            <material.TextField
+              id="outlined-required"
+              label="Mensagem"
               {...register("message", { required: true })}
-              aria-label="minimum height"
-              minRows={10}
+              variant="outlined"
+              multiline={true}
+              minRows={5}
               maxRows={15}
-              maxLength={900}
-              placeholder="Detalhes do projeto"
               style={{
-                width: "100%",
-                padding: ".8rem",
-                border: "1px solid var(--gray)",
                 background: "var(--white)",
               }}
             />
             <p>{errors.message && "Por favor, digite sua MENSAGEM!"}</p>
-          </Box>
+          </material.Box>
 
           <div className={commonStyles.flex}>
             <button className={commonStyles.btn_default} type="submit">
-              Enviar
+              {loading ? "Enviando" : "Enviar"}
             </button>
-            <button
-              className={commonStyles.btn_secondary}
-              type="reset"
-              onClick={clearInput}
-            >
+            <button className={commonStyles.btn_secondary} type="reset">
               Cancelar
             </button>
           </div>
